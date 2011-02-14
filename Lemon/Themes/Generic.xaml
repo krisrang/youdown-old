@@ -1,0 +1,52 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Lemon="clr-namespace:Lemon" xmlns:Controls="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Lemon;component/Themes/Styles.xaml" />
+        <ResourceDictionary Source="/Lemon;component/Themes/Fonts.xaml"/>
+
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Colors.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Geometry.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Animations.xaml"/>
+
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/BusyIndicator.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Buttons.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/CheckBox.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Combobox.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/ContextMenu.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Expander.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Listbox.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/OverlayWindow.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/ProgressBar.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/RadioButton.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Scrollbar.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Scrollviewer.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Slider.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/TabControl.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/TextBox.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Throbber.xaml"/>
+        <ResourceDictionary Source="/Lemon;component/Themes/Metro/Tooltip.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type Controls:BusyIndicator}" BasedOn="{StaticResource MetroBusyIndicator}" />
+    <Style TargetType="{x:Type Hyperlink}" BasedOn="{StaticResource MetroHyperlink}" />
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButtonLarge}" />
+    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroToggleButton}" />
+    <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource MetroRepeatButton}" />
+    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MetroCheckBox}" />
+    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MetroComboBox}" />
+    <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource MetroContextMenu}" />
+    <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource MetroExpander}" />
+    <Style TargetType="{x:Type Lemon:OverlayWindow}" BasedOn="{StaticResource MetroOverlayWindow}" />
+    <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource MetroProgressBar}" />
+    <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MetroRadioButton}" />
+    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource MetroScrollBar}" />
+    <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource MetroScrollViewer}" />
+    <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MetroSlider}" />
+    <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}" />
+    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource MetroTabControl}" />
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" />
+    <Style TargetType="{x:Type RichTextBox}" BasedOn="{StaticResource MetroRichTextBox}" />
+    <Style TargetType="{x:Type Lemon:HintTextBox}" BasedOn="{StaticResource MetroHintTextBox}" />
+    <Style TargetType="{x:Type ToolTip}" BasedOn="{StaticResource MetroToolTip}" />
+</ResourceDictionary>

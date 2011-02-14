@@ -1,0 +1,104 @@
+﻿<Lemon:OverlayWindow
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Lemon="clr-namespace:Lemon;assembly=Lemon" 
+             xmlns:ViewModelLocator="clr-namespace:MEFedMVVM.ViewModelLocator;assembly=MEFedMVVM.WPF" xmlns:Microsoft_Windows_Controls="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:Core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions" xmlns:ei1="http://schemas.microsoft.com/expression/2010/interactions" x:Class="YouDown.Views.ImportView"
+             mc:Ignorable="d" Title="IMPORT"
+             ViewModelLocator:ViewModelLocator.ViewModel="ImportViewModel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30" d:DesignWidth="450" d:DesignHeight="400">
+	<Lemon:OverlayWindow.Resources>
+        <ItemsPanelTemplate x:Key="VideosPanelTemplate">
+            <VirtualizingStackPanel IsItemsHost="True"/>
+        </ItemsPanelTemplate>
+		<DataTemplate x:Key="VideoTemplate">
+            <Grid Height="50" Margin="0,2">
+                <i:Interaction.Behaviors>
+                    <Lemon:InvalidateListBoxItemAfterLoadBehavior/>
+                </i:Interaction.Behaviors>
+                <Image Source="{Binding Thumbnail}" Height="Auto" Width="70" HorizontalAlignment="Left" />
+                <Grid
+					Height="Auto" Width="Auto" Margin="80,0,0,0" d:LayoutOverrides="Width" >
+                    <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="20" d:LayoutOverrides="Height" Margin="-31,0,0,1" Style="{DynamicResource MetroButtonSmall}" Cursor="Hand" ToolTip="Remove">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <Core:CallMethodAction TargetObject="{Binding}" MethodName="Cancel"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image Height="Auto" Source="/YouDown;component/Assets/stop.png" Stretch="Uniform"/>
+                    </Button>
+                    <TextBlock x:Name="VideoTitle" HorizontalAlignment="Left" d:LayoutOverrides="Height" VerticalAlignment="Top" Text="{Binding Title}" Margin="0,5,0,0" FontFamily="{DynamicResource BoldFontFamily}" FontSize="13.333" ToolTip="{Binding Title}" />
+                    <Grid x:Name="QualityGrid" Width="200" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Quality:" VerticalAlignment="Center" FontSize="13.333" d:LayoutOverrides="Width"/>
+                        <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="Auto" Height="25" ItemsSource="{Binding AvailableQualities}" Margin="60,0,0,0" DisplayMemberPath="Description" SelectedItem="{Binding DownloadQuality}" IsEnabled="{Binding Downloading, Converter={StaticResource BooleanReverseConverter}}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+	</Lemon:OverlayWindow.Resources>
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ImportStates">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:0.2">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="ImportList">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ListGrid">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="FormGrid">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="ListGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Microsoft_Windows_Controls:BusyIndicator BusyContent="Importing list..." IsBusy="{Binding IsBusy, IsAsync=True}">
+        	<Grid>
+        		<Grid x:Name="FormGrid" RenderTransformOrigin="0.5,0.5">
+        			<Grid.RenderTransform>
+        				<TransformGroup>
+        					<ScaleTransform/>
+        					<SkewTransform/>
+        					<RotateTransform/>
+        					<TranslateTransform/>
+        				</TransformGroup>
+        			</Grid.RenderTransform>
+        			<StackPanel Margin="10">
+        				<RadioButton x:Name="ImportTextRadioButton" Content="Import from text file" GroupName="ImportSelection" IsChecked="{Binding FileImport, FallbackValue=True}" TabIndex="1"/>
+        				<Grid Margin="5" IsEnabled="{Binding IsChecked, ElementName=ImportTextRadioButton}">
+        					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="File location:" d:LayoutOverrides="Height" VerticalAlignment="Center" Style="{DynamicResource DisabledTextBlockStyle}"/>
+        					<TextBox x:Name="TargetBox" TextWrapping="Wrap" Margin="80,0,25,0" IsReadOnly="True" IsEnabled="False"/>
+        					<TextBlock Margin="85,5,25,0" Text="{Binding TargetPath, FallbackValue=Target}" TextTrimming="CharacterEllipsis" ToolTip="{Binding TargetPath, FallbackValue=Target}" Opacity="0.5"/>
+        					<Button Content="..." HorizontalAlignment="Right" Width="20" TabIndex="2" Command="{Binding TargetCommand}"/>
+        				</Grid>
+        				<RadioButton x:Name="ImportFavRadioButton" Content="Import from YouTube favorites" GroupName="ImportSelection" Margin="0,10,0,0" TabIndex="3" IsChecked="{Binding FavImport}"/>
+        				<Grid Margin="5" IsEnabled="{Binding IsChecked, ElementName=ImportFavRadioButton}">
+        					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="YouTube username:" d:LayoutOverrides="Height" VerticalAlignment="Center" Style="{DynamicResource DisabledTextBlockStyle}"/>
+        					<Lemon:HintTextBox TextWrapping="Wrap" Margin="110,0,0,0" Height="23" HintText="Enter YouTube username" TabIndex="4" Text="{Binding Username}"/>
+        				</Grid>
+        				<Grid Height="25" Margin="5,20,5,0">
+        					<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" d:LayoutOverrides="Height" Text="Max desired video quality:" VerticalAlignment="Center"/>
+        					<ComboBox Height="25" Margin="150,0,0,0" ItemsSource="{Binding QualityList}" DisplayMemberPath="Description" SelectedItem="{Binding SelectedQuality}" Width="200" HorizontalAlignment="Left"/>
+        				</Grid>
+        			</StackPanel>
+        			<Button Content="_Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" d:LayoutOverrides="Height" TabIndex="5" Command="{Binding NextCommand}"/>
+        		</Grid>
+        		<Grid x:Name="ListGrid" RenderTransformOrigin="0.5,0.5" Opacity="0" IsHitTestVisible="False" Margin="10,10,0,0">
+        			<Button Content="_Add To List" VerticalAlignment="Bottom" Width="75" d:LayoutOverrides="Height" HorizontalAlignment="Right" Command="{Binding AddCommand}" IsEnabled="{Binding Done}"/>
+                    <ListBox BorderThickness="0" Background="{x:Null}" Margin="0,20,0,30" ItemsSource="{Binding Videos}" ItemTemplate="{DynamicResource VideoTemplate}" ItemContainerStyle="{DynamicResource MetroListItemContainerStyle}" ItemsPanel="{DynamicResource VideosPanelTemplate}"/>
+        			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Select the videos you want to import:" VerticalAlignment="Top" FontFamily="{DynamicResource BoldFontFamily}" FontSize="13.333"/>
+        			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Status}" VerticalAlignment="Bottom"/>
+        		</Grid>
+        	</Grid>
+        </Microsoft_Windows_Controls:BusyIndicator>
+    </Grid>
+</Lemon:OverlayWindow>

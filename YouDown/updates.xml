@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<updates>
+  <update version="1.0.0.0" required="true">
+    <![CDATA[
+    * Final release
+    ]]>
+  </update>
+  <update version="0.9.2.0" required="true">
+    <![CDATA[
+    * Slight style change
+    * Default Quality renamed to Max Quality and is saved between runs like Default Download Path
+    
+    Bugs:
+    * HTML encoded characters such as & now show correctly
+    * Download directory cannot be changed after adding video
+    ]]>
+  </update>
+</updates>

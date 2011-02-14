@@ -1,0 +1,143 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Lemon="clr-namespace:Lemon">
+
+    <Style x:Key="MetroTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource MetroTextBoxCaret}" />
+		<Setter Property="Padding" Value="2,3,2,3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border Name="Border" Background="{DynamicResource MetroTextBoxBg}" BorderBrush="{DynamicResource MetroTextBoxBorder}" BorderThickness="1">
+                        <ScrollViewer Margin="{TemplateBinding Padding}" FontSize="13" x:Name="PART_ContentHost" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroTextBoxBorderHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroSelectColor}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroTextBoxErrorBorder}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MetroTextBoxErrorBg}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Header="Cut" Command="ApplicationCommands.Cut"/>
+                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
+                    <MenuItem Header="Paste" Command="ApplicationCommands.Paste"/>
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MetroHintTextBox" TargetType="{x:Type Lemon:HintTextBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource MetroTextBoxCaret}" />
+		<Setter Property="Padding" Value="2,3,2,3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Lemon:HintTextBox}">
+                    <Grid>                
+                        <Border Name="Border" Background="{DynamicResource MetroTextBoxBg}" BorderBrush="{DynamicResource MetroTextBoxBorder}" BorderThickness="1">
+                            <ScrollViewer Margin="{TemplateBinding Padding}" x:Name="PART_ContentHost" />
+                        </Border>
+
+                        <TextBlock Visibility="Hidden" Name="HintTextBlock" FontStyle="Italic" Foreground="Black" Opacity="0.3" Text="{TemplateBinding HintText}"
+                                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroTextBoxBorderHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroSelectColor}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroTextBoxErrorBorder}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MetroTextBoxErrorBg}" />
+                        </Trigger>
+                        <Trigger Property="HintVisible" Value="True">
+                            <Setter TargetName="HintTextBlock" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Header="Cut" Command="ApplicationCommands.Cut"/>
+                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
+                    <MenuItem Header="Paste" Command="ApplicationCommands.Paste"/>
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MetroRichTextBox" TargetType="{x:Type RichTextBox}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource MetroTextBoxCaret}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RichTextBox}">
+                    <Border Name="Border" Background="{DynamicResource MetroTextBoxBg}" BorderBrush="{DynamicResource MetroTextBoxBorder}" BorderThickness="1">
+                        <ScrollViewer Margin="0,3,0,0" FontSize="13" x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroTextBoxBorderHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MetroSelectColor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Header="Cut" Command="ApplicationCommands.Cut"/>
+                    <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
+                    <MenuItem Header="Paste" Command="ApplicationCommands.Paste"/>
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

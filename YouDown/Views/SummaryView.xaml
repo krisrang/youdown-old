@@ -1,0 +1,36 @@
+﻿<Lemon:OverlayWindow x:Class="YouDown.Views.SummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Presentation="clr-namespace:YouDown.Presentation" xmlns:Lemon="clr-namespace:Lemon;assembly=Lemon" mc:Ignorable="d" 
+             Margin="50" Title="SUMMARY" OverlayBrush="#BFCCCCCC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             d:DesignHeight="400" d:DesignWidth="400">
+	<Lemon:OverlayWindow.Resources>
+		<Presentation:VideoStateToVisibilityConverter x:Key="VideoStateToVisibilityConverter"/>
+		<DataTemplate x:Key="SummaryVideoTemplate">
+			<Grid Height="75" Margin="0,2">
+				<Image Source="{Binding Thumbnail}" Height="75" Width="100" HorizontalAlignment="Left" />
+				<Grid Margin="110,0,0,0" >
+                    <TextBlock x:Name="VideoTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Title}" Margin="0" FontFamily="{DynamicResource BoldFontFamily}" FontSize="13.333" ToolTip="{Binding Title}" Height="20" TextTrimming="WordEllipsis" />
+					<TextBlock x:Name="Summary" Text="{Binding SummaryText}" ToolTip="{Binding SummaryText}" Margin="0,20,0,0" VerticalAlignment="Top" Height="38" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontStyle="Italic"/>
+					<StackPanel Orientation="Horizontal" Height="16" VerticalAlignment="Bottom">
+						<Image Height="16" Source="/YouDown;component/Assets/accept.png" Stretch="Uniform" Width="16" Visibility="{Binding State, ConverterParameter=Downloaded, Converter={StaticResource VideoStateToVisibilityConverter}}"/>
+						<Image Height="16" Source="/YouDown;component/Assets/error.png" Stretch="Uniform" Width="16" Visibility="{Binding State, ConverterParameter=Cancelled, Converter={StaticResource VideoStateToVisibilityConverter}}"/>
+						<Image Height="16" Source="/YouDown;component/Assets/exclamation.png" Stretch="Uniform" Width="16" Visibility="{Binding State, ConverterParameter=Error, Converter={StaticResource VideoStateToVisibilityConverter}}"/>
+					</StackPanel>
+				</Grid>
+			</Grid>
+		</DataTemplate>
+	</Lemon:OverlayWindow.Resources>
+    <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition/>
+    		<RowDefinition Height="Auto"/>
+    	</Grid.RowDefinitions>
+    	<ListBox BorderThickness="0" Background="{x:Null}" ItemsSource="{Binding FinishedVideos}" ItemTemplate="{DynamicResource SummaryVideoTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource MetroListItemContainerStyle}"/>
+    	<StackPanel HorizontalAlignment="Right" Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0">
+    		<Button Content="Close" Height="Auto" Width="75" Click="Button_Click"/>
+    	</StackPanel>
+        
+    </Grid>
+</Lemon:OverlayWindow>

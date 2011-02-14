@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <FontFamily x:Key="ContentFontFamily">/Lemon;component/Fonts/#Segoe WP</FontFamily>
+    <FontFamily x:Key="BoldFontFamily">/Lemon;component/Fonts/#Segoe WP Semibold</FontFamily>
+	<System:Double x:Key="HeaderFontSize">16</System:Double>
+</ResourceDictionary>

@@ -1,0 +1,9 @@
+*.user
+*.suo
+*ReSharper*
+bin
+Bin
+obj
+Obj
+publish
+*.pfx

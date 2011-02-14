@@ -1,0 +1,17 @@
+var fullscreenUrl = '/watch_fullscreen?
+fs=1
+watermark=http%3A%2F%2Fs.ytimg.com%2Fyt%2Fswf%2Flogo-vfl106645.swf%2Chttp%3A%2F%2Fs.ytimg.com%2Fyt%2Fswf%2Fhdlogo-vfl100714.swf
+video_id=5g3LSOt0Cz8
+l=119
+fmt_map=18%2F512000%2F9%2F0%2F115%2C5%2F0%2F7%2F0%2F0
+sk=Rktb0uxLpvGh8TQlitoaCYegbxyJV8jEC
+is_doubleclick_tracked=1
+vq=None
+t=vjVQa1PpcFMXr4B6VJUag6_Vt1_UQiJ4UJT5bv-6t-M%3D
+hl=en
+plid=AARvORNPCsgWwFhl
+keywords=bioshock%252Crapture%252Cwelcome%252Candrew%252Cryan
+cr=US
+fmt_url_map=18%257Chttp%253A%2F%2Fv20.lscache7.googlevideo.com%2Fvideoplayback%253Fip%253D0.0.0.0%2526sparams%253Did%25252Cexpire%25252Cip%25252Cipbits%25252Citag%25252Cburst%25252Cfactor%2526itag%253D18%2526ipbits%253D0%2526signature%253D30EBDE698D8CA7D917D2FFC165C707FFA8705F59.A8CBDFB812C70676780D02F3004DE2871B1F9E2E%2526sver%253D3%2526expire%253D1248213600%2526key%253Dyt1%2526factor%253D1.25%2526burst%253D40%2526id%253De60dcb48eb740b3f%252C5%257Chttp%253A%2F%2Fv22.lscache5.googlevideo.com%2Fvideoplayback%253Fip%253D0.0.0.0%2526sparams%253Did%25252Cexpire%25252Cip%25252Cipbits%25252Citag%25252Cburst%25252Cfactor%2526itag%253D5%2526ipbits%253D0%2526signature%253D1318C3E21B85BFD1FFC412D04F9B27925288212A.29A5B80719500F132153DCC801330D00C7DBECEB%2526sver%253D3%2526expire%253D1248213600%2526key%253Dyt1%2526factor%253D1.25%2526burst%253D40%2526id%253De60dcb48eb740b3f
+title=Welcome to Rapture (BioShock)
+';

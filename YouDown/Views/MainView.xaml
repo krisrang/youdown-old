@@ -1,0 +1,80 @@
+﻿<Lemon:LayeredWindow
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:mefed="http:\\www.codeplex.com\MEFedMVVM"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:Lemon="clr-namespace:Lemon;assembly=Lemon" xmlns:Controls="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" mc:Ignorable="d"
+		x:Name="WindowRoot" x:Class="YouDown.Views.MainView"
+		mefed:ViewModelLocator.ViewModel="MainViewModel"
+		Title="YouDown" Height="410" Width="510" MinHeight="410" MinWidth="510" Icon="/Assets/YouDown.png">
+	<Lemon:LayeredWindow.Resources>
+		<Lemon:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Lemon:LayeredWindow.Resources>
+	<Lemon:LayeredWindow.TaskbarItemInfo>
+		<TaskbarItemInfo Description="YouDown" ThumbnailClipMargin="{Binding Margin, ElementName=LayoutRoot}" ProgressState="{Binding ProgressState}" ProgressValue="{Binding SmallProgress}"/>
+	</Lemon:LayeredWindow.TaskbarItemInfo>
+	<Grid x:Name="LayoutRoot" Background="{DynamicResource MainBackground}">		
+		<Grid x:Name="VisualBorderElements" IsHitTestVisible="False">
+			<Rectangle x:Name="RightGradient" Fill="{DynamicResource HighlightBrush}" HorizontalAlignment="Right" Width="1"/>
+			<Rectangle x:Name="BottomGradient" Fill="{DynamicResource BrandingBrush}" Height="1" VerticalAlignment="Bottom"/>
+			<Rectangle x:Name="BrandingBox" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="8" Margin="0,30,0,0" Fill="{DynamicResource BrandingBrushAlt}"/>
+		</Grid>
+		<Grid x:Name="ElementGrid">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<ProgressBar x:Name="WindowProgress" VerticalAlignment="Top" Style="{DynamicResource ThinProgressBarStyle}" Height="3" Value="{Binding TotalProgress}" Foreground="{DynamicResource ZuneGradientAlt}"/>
+			<Grid x:Name="WindowTitlebar" Margin="4,4,4,0" Height="50">
+                <TextBlock TextWrapping="Wrap" Text="YouDown" FontFamily="{DynamicResource BoldFontFamily}" FontSize="21.333" Margin="20,-10,0,0" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+				<Rectangle x:Name="WindowDragHitbar" Fill="#00000000">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="MouseLeftButtonDown">
+							<ei:CallMethodAction TargetObject="{Binding ElementName=WindowRoot}" MethodName="DragMove"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</Rectangle>
+				<StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,0,70,0" Visibility="{Binding ScreenChangeVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Button Content="SETTINGS" d:LayoutOverrides="Height" Style="{DynamicResource MetroPathButton}" FontFamily="{DynamicResource BoldFontFamily}" FontSize="10.667" Command="{Binding SettingsCommand}"/>
+				</StackPanel>
+			
+				<StackPanel x:Name="WindowControls" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,5,0">
+                    <Button x:Name="MinimiseButton" Style="{DynamicResource MetroPathButton}" Width="16" Height="16" ToolTip="Minimize">
+						<Grid>
+							<Rectangle x:Name="min" Width="7" Height="2" Fill="Black" VerticalAlignment="Bottom" Margin="0,0,0,3" />
+						</Grid>
+					</Button>
+                    <Button x:Name="CloseBtn" Width="16" Style="{DynamicResource MetroPathButton}" Height="16" ToolTip="Quit">
+						<Grid>
+							<Path x:Name="close" Fill="Black" Data="F1 M 171.964,69.0358 L 169.982,67.0534 166.988,70.047 164.01,67.0694 162.02,69.0599 164.997,72.0375 162.028,75.0071 164.01,76.9895 166.98,74.0199 169.973,77.0135 171.964,75.0231 168.97,72.0294 171.964,69.0358 Z" Stretch="Fill" Width="9" Height="9" />
+						</Grid>
+					</Button>
+				</StackPanel>
+			</Grid>
+            <Controls:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="{Binding BusyContent}" Grid.Row="1" Margin="20,0,15,5">
+                <ContentControl x:Name="ChildControl" RenderTransformOrigin="0.5,0.5">
+            	    <ContentControl.RenderTransform>
+            		    <TransformGroup>
+            			    <ScaleTransform/>
+            			    <SkewTransform/>
+            			    <RotateTransform/>
+            			    <TranslateTransform/>
+            		    </TransformGroup>
+            	    </ContentControl.RenderTransform>
+                </ContentControl>
+            </Controls:BusyIndicator>
+		</Grid>
+		<Grid x:Name="ResizeElements" Panel.ZIndex="9000">
+			<ResizeGrip x:Name="WindowGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsHitTestVisible="False"/>
+			<Rectangle x:Name="LeftBorder" HorizontalAlignment="Left" Width="2" Cursor="SizeWE" Fill="#00000000"/>
+			<Rectangle x:Name="RightBorder" HorizontalAlignment="Right" Width="2" Cursor="SizeWE" Fill="#00000000"/>
+			<Rectangle x:Name="BottomBorder" Fill="#00000000" Height="2" VerticalAlignment="Bottom" Cursor="SizeNS"/>
+			<Rectangle x:Name="TopBorder" Height="2" VerticalAlignment="Top" Cursor="SizeNS" Fill="#00000000"/>
+			<Rectangle x:Name="TopLeftCorner" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="10" Cursor="SizeNWSE" Fill="#00000000"/>
+			<Rectangle x:Name="TopRightCorner" HorizontalAlignment="Right" Height="10" VerticalAlignment="Top" Width="10" Cursor="SizeNESW" Fill="#00000000"/>
+			<Rectangle x:Name="BottomLeftCorner" HorizontalAlignment="Left" Height="10" VerticalAlignment="Bottom" Width="10" Cursor="SizeNESW" Fill="#00000000"/>
+			<Rectangle x:Name="BottomRightCorner" HorizontalAlignment="Right" Height="10" VerticalAlignment="Bottom" Width="10" Cursor="SizeNWSE" Fill="#00000000"/>
+		</Grid>
+	</Grid>
+</Lemon:LayeredWindow>
